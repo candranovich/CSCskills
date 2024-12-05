@@ -6,8 +6,11 @@
  * Each test case is a list of numbers and for each test case it outputs if there are two values
  * such that their product equals the sums of the other values in the list.
  * This code uses a simple brute-force algorithm so the running time
- * is Theta(????) -- PLEASE ANALYZE YOUR CODE'S PERFORMANCE!
+ * is Theta(n^3) -- PLEASE ANALYZE YOUR CODE'S PERFORMANCE!
  **************/
+//Runs:
+// java ProductAndSum < input1.txt 
+// java ProductAndSum < input2.txt 
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -35,28 +38,27 @@ public class ProductAndSum {
      * Determines if there are any two values whose product equals the sum of the rest of the elements
      **/
     public static boolean hasProductAndSum(ArrayList<Integer> list) {
-        // Iterate over all possible pairs of elements in the list
-              for (int i = 0; i < list.size(); i++) {
-                  for (int j = i + 1; j < list.size(); j++) {
-                      // Calculate the product of the two selected elements
-                      int product = list.get(i) * list.get(j);
-          
-                      // Calculate the sum of the remaining elements
-                      int remainingSum = 0;
-                      for (int k = 0; k < list.size(); k++) {
-                          if (k != i && k != j) {
-                              remainingSum += list.get(k);
-                          }
-                      }
-          
-                      // Check if the product equals the sum of the remaining elements
-                      if (product == remainingSum) {
-                          return true;
-                      }
-                  }
-              }
-              // If no such pair is found, return false
-              return false;
-          }
-      }
-  
+        // Iterate over all possible pairs of elements
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = i + 1; j < list.size(); j++) {
+                // Get the product of the current pair
+                int product = list.get(i) * list.get(j);
+    
+                // Calculate the sum of the other elements
+                int remainingSum = 0;
+                for (int k = 0; k < list.size(); k++) {
+                    if (k != i && k != j) {
+                        remainingSum += list.get(k);
+                    }
+                }
+    
+                // Check if product equals the sum of the other elements
+                if (product == remainingSum) {
+                    return true;
+                }
+            }
+        }
+        // Return false if no valid pair is found
+        return false;
+    }
+}    
